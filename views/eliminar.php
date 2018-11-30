@@ -1,5 +1,5 @@
 <?php
-    include '../controllers/update.php';
+    include '../controllers/delete.php';
 ?>
 <!doctype html>
 <html lang="en">
@@ -27,18 +27,11 @@
                     <form class="needs-validation" action="../controllers/update.php?id=<?php echo $id?>" method="post" >
                         <div class="row">
                             <div class="col-md-4 mb-3">
-                                <label for="firstName">Nombre</label>
+                                <label for="firstName">Desea Eliminar</label>
 
         <input name="cmp_nombre" type="text" class="form-control" value="<?php echo !empty($cmp_nombre)?$cmp_nombre:'';?>" required >
                             </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="lastName">Apellido Paterno</label>
-        <input type="text" class="form-control" name="cmp_pat" value="<?php echo !empty($cmp_pat)?$cmp_pat:'';?>" required >
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="lastName">Apellido Materno</label>
-        <input type="text" class="form-control" name="cmp_mat" value="<?php echo !empty($cmp_mat)?$cmp_mat:'';?>" required >
-                            </div>
+
                         </div>
 
                         <div style="text-align: center !important;">

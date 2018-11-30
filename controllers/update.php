@@ -23,7 +23,7 @@
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $sql = "UPDATE Tbl_test1 set cmp_nombre = ?, cmp_pat = ?, cmp_mat = ? WHERE id=?";
             $q = $pdo->prepare($sql);
-            $q->execute(array($id,$cmp_nombre, $cmp_pat, $cmp_mat));
+            $q->execute(array($cmp_nombre, $cmp_pat, $cmp_mat, $id));
             Database::disconnect();
             header("Location: ../views/index.php");
         }
