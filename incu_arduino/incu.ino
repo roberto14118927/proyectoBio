@@ -1,4 +1,3 @@
-const byte ledPin = 13;
 const byte interruptPin = 2;
 volatile byte state = LOW;
 int AC_LOAD = 3;   
