@@ -31,16 +31,18 @@ void loop() {
 
   if (Serial.available() > 0) {
         char d = Serial.read();
-        if(d == 'A'){
+        if(d == 'P'){
           digitalWrite(LED_BUILTIN, HIGH);
-          Serial.println("Dato Ok");
+        }
+        if(d == 'A'){
+          digitalWrite(LED_BUILTIN, LOW);
         }
   }
   dimming = dimming + 1;
   if (dimming>=60){
     dimming=0;
   }
-  delay(50);
+  delay(10);
 }
 
 void blink() {

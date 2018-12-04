@@ -6,9 +6,16 @@ socket.on('sensor', function(data){
     imprimeTemperatura(data.data);
 });
 
-function send(){
+function on(){
     var sendData = {
       'imei': '1'
     };
-    socket.emit('send-data', sendData);
+    socket.emit('send-on', sendData);
+  }
+
+  function off(){
+    var sendData = {
+      'imei': '1'
+    };
+    socket.emit('send-off', sendData);
   }

@@ -49,6 +49,16 @@ io.on('connection', function (socket) {
     console.log('close')
   });
 
+  socket.on('send-on', function(data) {
+    // console.log(data.imei);
+    port.write('P\n');
+  });
+
+  socket.on('send-off', function(data) {
+    // console.log(data.imei);
+    port.write('A\n');
+  });
+
 });
 
 io.on('error', function (err) {

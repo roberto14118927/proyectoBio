@@ -1,7 +1,6 @@
 <?php
     include '../controllers/update.php';
 ?>
-<!doctype html>
 <html lang="en">
     <head>
         <!-- Required meta tags -->
@@ -24,20 +23,42 @@
 
                 <div class="col-md-12 order-md-1">
                     <h4 class="mb-3 text-center">Registro de Neonatos</h4>
-                    <form class="needs-validation" action="../controllers/update.php?id=<?php echo $id?>" method="post" >
+                    <form
+                        class="needs-validation"
+                        action="../controllers/update.php?id=<?php echo $id?>"
+                        method="post"
+                    >
                         <div class="row">
                             <div class="col-md-4 mb-3">
                                 <label for="firstName">Nombre</label>
 
-        <input name="cmp_nombre" type="text" class="form-control" value="<?php echo !empty($cmp_nombre)?$cmp_nombre:'';?>" required >
+                                <input
+                                    name="cmp_nombre"
+                                    type="text"
+                                    class="form-control"
+                                    value="<?php echo !empty($cmp_nombre)?$cmp_nombre:'';?>"
+                                    required
+                                >
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="lastName">Apellido Paterno</label>
-        <input type="text" class="form-control" name="cmp_pat" value="<?php echo !empty($cmp_pat)?$cmp_pat:'';?>" required >
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    name="cmp_pat"
+                                    value="<?php echo !empty($cmp_pat)?$cmp_pat:'';?>"
+                                    required
+                                >
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="lastName">Apellido Materno</label>
-        <input type="text" class="form-control" name="cmp_mat" value="<?php echo !empty($cmp_mat)?$cmp_mat:'';?>" required >
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    name="cmp_mat"
+                                    value="<?php echo !empty($cmp_mat)?$cmp_mat:'';?>"
+                                    required
+                                >
                             </div>
                         </div>
 
@@ -50,10 +71,26 @@
                             </button>
 
                         </div>
+                        <br>
 
                     </form>
                     <br>
-                   
+                    <div style="text-align: center !important;">
+                        <button
+                            class="btn btn-primary btn-lg btn"
+                            onclick="on();"
+                        >
+                            Prender
+                        </button>
+                        <br>
+                        <br>
+                        <button
+                            class="btn btn-primary btn-lg btn"
+                            onclick="off();"
+                        >
+                            Apagar
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -78,9 +115,9 @@
             crossorigin="anonymous"
         ></script>
         <script src="http://172.16.56.117:5678/socket.io/socket.io.js"></script>
-        <script src="../js/cliente.js"></script> 
+        <script src="../js/cliente.js"></script>
         <script>
-         function imprimeTemperatura(datos){
+            function imprimeTemperatura(datos){
             document.getElementById("LM35").innerHTML = datos;
         }
             // Example starter JavaScript for disabling form submissions if there are invalid fields
