@@ -1,50 +1,79 @@
-var Router = require('router')
-var finalhandler = require('finalhandler')
-var http         = require('http')
-var request = require("request");
- 
-var router = Router()
-function ReadSerialData(data){
-  	console.log(data);
-
-  	request({
-  uri: "/views/index.php",
-  method: "GET",
-  form: {
-    name: "Bob"
-  }
-}, function(error, response, body) {
-  console.log(body);
-});
-
-}
-
-
-const express = require('express');
-const app = express();
 const SerialPort = require('serialport');
 const parsers = SerialPort.parsers;
+var Router = require('router')
+var finalhandler = require('finalhandler')
+var http = require('http')
+var request = require("request");
+var express = require('express');
+var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+var os = require('os');
 
-//server = app.listen(3000)
-	router.get('/views/index', function(req,res) {
-		console.log("ok")
-	   var dataToSendObj = {'title': 'Your Website Title', 'message': 'Hello'};
-	   res.render('index',dataToSendObj);
-	});
-//const io = require('socket.io')(server)
+var interfaces = os.networkInterfaces();
+var addresses = [];
+for (var k in interfaces) {
+  for (var k2 in interfaces[k]) {
+    var address = interfaces[k][k2];
+    if (address.family === 'IPv4' && !address.internal) {
+      addresses.push(address.address);
+    }
+  }
+}
 
-// Use a `\r\n` as a line terminator
+var router = Router()
+var HOST = addresses[2];
+var PORT = 3333;
+server.listen(5678);
+
+io.on('connection', function (socket) {
+  //web_sockets.push(socket)
+
+  socket.on('disconnect', function () {
+    console.log('desconectado')
+  });
+
+  socket.on('end', function () {
+    console.log('end')
+  });
+
+  socket.on('error', function () {
+    console.log('error')
+  });
+
+  socket.on('timeout', function () {
+    console.log('timeout')
+  });
+
+  socket.on('close', function () {
+    console.log('close')
+  });
+
+});
+
+io.on('error', function (err) {
+  console.error(err)
+});
+
+
+function ReadSerialData(data) {
+  console.log(data);
+  io.emit('sensor', {
+    data: data,
+  });
+}
+
 const parser = new parsers.Readline({
   delimiter: '\r\n'
 });
 
-const port = new SerialPort('COM3', {
+const port = new SerialPort('/dev/cu.usbmodem141401', {
   baudRate: 9600
 });
 
 port.pipe(parser);
 
-port.on('open', () => console.log('Port open'));
+port.on('open', () => console.log('Puerto Abierto'));
 
 parser.on('data', ReadSerialData);
 

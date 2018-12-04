@@ -11,10 +11,10 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-        <title>Hello, world!</title>
+        <title>Incubadora</title>
     </head>
     <body class="bg-light">
- message from server: {{name}}
+    <p id="LM351"></p>
         <div class="container">
             <br>
             <div class="row">
@@ -101,13 +101,14 @@
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"
         ></script>
+
+        <script src="http://172.16.56.117:5678/socket.io/socket.io.js"></script>
+        <script src="../js/cliente.js"></script> 
         <script>
-            window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
-        </script>
-        <script src="../../assets/js/vendor/popper.min.js"></script>
-        <script src="../../dist/js/bootstrap.min.js"></script>
-        <script src="../../assets/js/vendor/holder.min.js"></script>
-        <script>
+
+        function imprimeTemperatura(datos){
+            document.getElementById("LM351").innerHTML = datos;
+        }
             // Example starter JavaScript for disabling form submissions if there are invalid fields
           (function() {
             'use strict';
