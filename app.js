@@ -67,7 +67,7 @@ io.on('error', function (err) {
 
 
 function ReadSerialData(data) {
-  console.log(data);
+  // console.log(data);
   io.emit('sensor', {
     data: data,
   });
