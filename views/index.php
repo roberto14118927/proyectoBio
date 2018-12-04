@@ -14,7 +14,7 @@
         <title>Hello, world!</title>
     </head>
     <body class="bg-light">
-
+ message from server: {{name}}
         <div class="container">
             <br>
             <div class="row">
