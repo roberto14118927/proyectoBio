@@ -17,16 +17,18 @@ void setup() {
 }
 
 void loop() {
-  for(int i=0; i<=100; i++){
-  ADC1 += analogRead(A0); 
-  //ADC2 = analogRead(A1);
-  
-  }
-  //LM352 = ((double)ADC2/1023)*5; 
-  ADC1 = (ADC1/100);
-  LM351 = ((double)ADC1/1023)*500;
-  LM35T = (LM351);
   ADC1 = 0;
+  ADC2 = 0;
+  for(int i=0; i<=10; i++){
+    ADC1 += analogRead(A0); 
+    ADC2 += analogRead(A1);
+  }
+  ADC1 = (ADC1/10);
+  ADC2 = (ADC2/10);
+  LM351 = ((double)ADC1/1023)*500;
+  LM352 = ((double)ADC2/1023)*500;
+  LM35T = ((LM351+LM352)/2);
+
   Serial.println(LM35T,1); //Imprime la variable double con 4 decimales
 
   if (Serial.available() > 0) {
@@ -42,7 +44,7 @@ void loop() {
   if (dimming>=60){
     dimming=0;
   }
-  delay(10);
+  delay(50);
 }
 
 void blink() {
@@ -51,5 +53,4 @@ void blink() {
   digitalWrite(AC_LOAD, HIGH);   
   delayMicroseconds(10);         
   digitalWrite(AC_LOAD, LOW); 
-
 }

@@ -79,7 +79,7 @@
                         <button
                             class="btn btn-primary btn-lg btn"
                             onclick="on();"
-                        >
+        >
                             Prender
                         </button>
                         <br>
