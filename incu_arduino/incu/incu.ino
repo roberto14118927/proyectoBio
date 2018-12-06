@@ -19,10 +19,12 @@ void setup() {
 void loop() {
   ADC1 = 0;
   ADC2 = 0;
+  
   for(int i=0; i<=10; i++){
     ADC1 += analogRead(A0); 
     ADC2 += analogRead(A1);
   }
+
   ADC1 = (ADC1/10);
   ADC2 = (ADC2/10);
   LM351 = ((double)ADC1/1023)*500;

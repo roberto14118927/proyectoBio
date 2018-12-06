@@ -1,14 +1,11 @@
 const SerialPort = require('serialport');
 const parsers = SerialPort.parsers;
-var Router = require('router')
-var finalhandler = require('finalhandler')
-var http = require('http')
-var request = require("request");
 var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var os = require('os');
+var mysql = require('mysql');
 
 var interfaces = os.networkInterfaces();
 var addresses = [];
@@ -21,13 +18,19 @@ for (var k in interfaces) {
   }
 }
 
-var router = Router()
-var HOST = addresses[2];
-var PORT = 3333;
+
+var connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'me',
+  password: 'secret',
+  database: 'my_db'
+});
+
+connection.connect();
+
 server.listen(5678);
 
 io.on('connection', function (socket) {
-  //web_sockets.push(socket)
 
   socket.on('disconnect', function () {
     console.log('desconectado')
@@ -49,13 +52,11 @@ io.on('connection', function (socket) {
     console.log('close')
   });
 
-  socket.on('send-on', function(data) {
-    // console.log(data.imei);
+  socket.on('send-on', function (data) {
     port.write('P\n');
   });
 
-  socket.on('send-off', function(data) {
-    // console.log(data.imei);
+  socket.on('send-off', function (data) {
     port.write('A\n');
   });
 
@@ -67,10 +68,18 @@ io.on('error', function (err) {
 
 
 function ReadSerialData(data) {
-  // console.log(data);
   io.emit('sensor', {
     data: data,
   });
+  var post = {
+    id: 1,
+    title: 'Hello MySQL'
+  };
+  var query = connection.query('INSERT INTO posts SET ?', post, function (error, results, fields) {
+    if (error) throw error;
+    // Neat!
+  });
+  console.log(query.sql);
 }
 
 const parser = new parsers.Readline({
